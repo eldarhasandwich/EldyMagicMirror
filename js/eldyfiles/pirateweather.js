@@ -25,31 +25,6 @@ const recursivelyReadStream = async (stream) => {
 	return new Uint8Array([...output.value, ...nextValue]);
 };
 
-const parseWeatherUpdateJsonAsForecastTable = (weatherUpdateJson) => {
-	return weatherUpdateJson.daily.data
-		.map((day, index) => {
-			const highs = getTranslatedUnitsForCelciusValue(day.temperatureMax);
-			const lows = getTranslatedUnitsForCelciusValue(day.temperatureMin);
-
-			const displayDay = index === 0 ? "Today" : dayArray[new Date(day.time * 1000).getDay()];
-
-			return `
-            <tr>
-                <td>${displayDay}</td>
-
-                <td style="color:coral">${highs.f}°f</td>
-                <td style="color:coral">/</td>
-                <td style="color:coral">${highs.c}°c</td>
-
-                <td style="color:#6495ED">${lows.f}°f</td>
-                <td style="color:#6495ED">/</td>
-                <td style="color:#6495ED">${lows.c}°c</td>
-            </tr>
-        `;
-		})
-		.join("");
-};
-
 const fetchPirateWeatherUpdate = async () => {
 	// get weather forecast for austin
 	const requestUrl = "https://merry-sky.onrender.com/weather?q=cedar%20park";
@@ -62,29 +37,86 @@ const fetchPirateWeatherUpdate = async () => {
 	return readBodyStringJson;
 };
 
+const parseWeatherUpdateJsonAsForecastTable = (weatherUpdateJson) => {
+	return weatherUpdateJson.daily.data
+		.map((day, index) => {
+			const highs = getTranslatedUnitsForCelciusValue(day.temperatureMax);
+			const lows = getTranslatedUnitsForCelciusValue(day.temperatureMin);
+
+			const displayDay = index === 0 ? "Today" : dayArray[new Date(day.time * 1000).getDay()];
+
+			return `
+                <tr>
+                    <td>${displayDay}</td>
+
+                    <td style="color:coral">${highs.f}°f</td>
+                    <td style="color:coral">/</td>
+                    <td style="color:coral">${highs.c}°c</td>
+
+                    <td style="color:#6495ED">${lows.f}°f</td>
+                    <td style="color:#6495ED">/</td>
+                    <td style="color:#6495ED">${lows.c}°c</td>
+                </tr>
+            `;
+		})
+		.join("");
+};
+
+let weatherUpdateJson = undefined;
+
 const weatherUpdate = async () => {
-	const weatherUpdateJson = await fetchPirateWeatherUpdate();
+	weatherUpdateJson = await fetchPirateWeatherUpdate();
 
 	console.log({ weatherUpdateJson });
 
-	const currentActualTempurature = weatherUpdateJson.currently.temperature;
-	const currentFeelsLikeTempurature = weatherUpdateJson.currently.apparentTemperature;
-
-	const current = {
-		actual: getTranslatedUnitsForCelciusValue(currentActualTempurature),
-		feelsLike: getTranslatedUnitsForCelciusValue(currentFeelsLikeTempurature)
-	};
-
 	document.getElementById("weatherLocation").textContent = `weather | ${weatherUpdateJson.location.name}`;
-	document.getElementById("weatherActualTemp").textContent = `${current.actual.f}°f / ${current.actual.c}°c`;
-	document.getElementById("weatherFeelsLikeTemp").textContent = `feels like ${current.feelsLike.f}°f / ${current.feelsLike.c}°c`;
+
 	document.getElementById("weatherHumidity").textContent = `${roundToOneDecimal(weatherUpdateJson.currently.humidity * 100)}% humidity`;
 	document.getElementById("weatherCloudCover").textContent = `${roundToOneDecimal(weatherUpdateJson.currently.cloudCover * 100)}% cloud cover`;
 
 	document.getElementById("weatherForecastTable").innerHTML = parseWeatherUpdateJsonAsForecastTable(weatherUpdateJson);
 };
 
+const lerp = (v0, v1, t) => {
+	return (1 - t) * v0 + t * v1;
+};
+
+const grabInterpolatedHourlyValues = (weatherUpdateJson) => {
+	const currentTime = Date.now() / 1000 - 19 * 60 * 60;
+
+	const i = weatherUpdateJson.hourly.data.findIndex((d) => d.time > currentTime);
+
+	const datapointA = weatherUpdateJson.hourly.data[i];
+	const datapointB = weatherUpdateJson.hourly.data[i + 1];
+
+	const unit = datapointB.time - datapointA.time;
+	const interval = currentTime % unit;
+	const u = interval / unit;
+
+	return {
+		actual: lerp(datapointA.temperature, datapointB.temperature, u),
+		feelsLike: lerp(datapointA.apparentTemperature, datapointB.apparentTemperature, u)
+	};
+};
+
+const uiUpdateCurrentTemperature = () => {
+	if (!weatherUpdateJson) return;
+
+	const interpolatedValues = grabInterpolatedHourlyValues(weatherUpdateJson);
+
+	const current = {
+		actual: getTranslatedUnitsForCelciusValue(interpolatedValues.actual),
+		feelsLike: getTranslatedUnitsForCelciusValue(interpolatedValues.feelsLike)
+	};
+
+	document.getElementById("weatherActualTemp").textContent = `${current.actual.f}°f / ${current.actual.c}°c`;
+	document.getElementById("weatherFeelsLikeTemp").textContent = `feels like ${current.feelsLike.f}°f / ${current.feelsLike.c}°c`;
+};
+
 const weatherRunner = () => {
+	uiUpdateCurrentTemperature();
+	setInterval(uiUpdateCurrentTemperature, 1000);
+
 	weatherUpdate();
 	setInterval(weatherUpdate, HOUR_MS * 3);
 };
