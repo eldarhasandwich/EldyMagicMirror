@@ -1,6 +1,18 @@
 const COUNTDOWNLIST = [
 	{
-		name: "KSP2",
+		name: "2023 New Years",
+		date: "January 1 2023"
+	},
+	{
+		name: "Super Mario World Opening",
+		date: "February 17 2023"
+	},
+	{
+		name: "Atomic Heart Release",
+		date: "February 21 2023"
+	},
+	{
+		name: "KSP 2 Release",
 		date: "February 24 2023"
 	},
 	{
@@ -10,6 +22,18 @@ const COUNTDOWNLIST = [
 	{
 		name: "Eldy Bday",
 		date: "June 8 2023"
+	},
+	{
+		name: "Halloween",
+		date: "October 31 2023"
+	},
+	{
+		name: "Christmas",
+		date: "December 25 2023"
+	},
+	{
+		name: "New Years",
+		date: "January 1 2024"
 	}
 ];
 
@@ -28,14 +52,20 @@ const parseCountdownsAsDivList = () => {
 	});
 
 	return timeUntils
-		.map(
-			(item) => `
-        <div>
-            <span>${item.name} >>> </span>
-            <span>${Math.floor(item.millisecondsUntil / MILLISECONDS_PER_DAY)} days</span>
-        </div>
-    `
-		)
+		.sort((a, b) => a.millisecondsUntil - b.millisecondsUntil)
+		.map((item) => {
+			const name = item.name;
+			const time = Math.floor(item.millisecondsUntil / MILLISECONDS_PER_DAY);
+			const dateHasPassed = time < 0;
+			const timeString = !dateHasPassed ? `${time} days` : `${time * -1} days ago`;
+
+			return `
+                <div ${dateHasPassed && 'style="color:#90EE90"'}>
+                    <span>${name} >>> </span>
+                    <span>${timeString}</span>
+                </div>
+            `;
+		})
 		.join("");
 };
 
