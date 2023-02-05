@@ -1,4 +1,5 @@
 const COUNTDOWNLIST = [
+	{ name: "Hogwarts Legacy Release", date: "Febuary 10 2023" },
 	{
 		name: "2023 New Years",
 		date: "January 1 2023"
