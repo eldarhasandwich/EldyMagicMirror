@@ -37,13 +37,13 @@ const parseWeatherUpdateJsonAsForecastTable = (weatherUpdateJson) => {
             <tr>
                 <td>${displayDay}</td>
 
-                <td style="color:coral">${highs.f}°f</td>
+                <td style="color:coral">${highs.f}°F</td>
                 <td style="color:coral">/</td>
-                <td style="color:coral">${highs.c}°c</td>
+                <td style="color:coral">${highs.c}°C</td>
 
-                <td style="color:#6495ED">${lows.f}°f</td>
+                <td style="color:#6495ED">${lows.f}°F</td>
                 <td style="color:#6495ED">/</td>
-                <td style="color:#6495ED">${lows.c}°c</td>
+                <td style="color:#6495ED">${lows.c}°C</td>
             </tr>
         `;
 		})
@@ -75,11 +75,11 @@ const weatherUpdate = async () => {
 		feelsLike: getTranslatedUnitsForCelciusValue(currentFeelsLikeTempurature)
 	};
 
-	document.getElementById("weatherLocation").textContent = `weather | ${weatherUpdateJson.location.name}`;
-	document.getElementById("weatherActualTemp").textContent = `${current.actual.f}°f / ${current.actual.c}°c`;
-	document.getElementById("weatherFeelsLikeTemp").textContent = `feels like ${current.feelsLike.f}°f / ${current.feelsLike.c}°c`;
-	document.getElementById("weatherHumidity").textContent = `${roundToOneDecimal(weatherUpdateJson.currently.humidity * 100)}% humidity`;
-	document.getElementById("weatherCloudCover").textContent = `${roundToOneDecimal(weatherUpdateJson.currently.cloudCover * 100)}% cloud cover`;
+	document.getElementById("weatherLocation").textContent = `Weather | ${weatherUpdateJson.location.name}`;
+	document.getElementById("weatherActualTemp").textContent = `${current.actual.f}°F / ${current.actual.c}°C`;
+	document.getElementById("weatherFeelsLikeTemp").textContent = `Feels like ${current.feelsLike.f}°F / ${current.feelsLike.c}°C`;
+	document.getElementById("weatherHumidity").textContent = `${roundToOneDecimal(weatherUpdateJson.currently.humidity * 100)}% Humidity`;
+	document.getElementById("weatherCloudCover").textContent = `${roundToOneDecimal(weatherUpdateJson.currently.cloudCover * 100)}% Cloud cover`;
 
 	document.getElementById("weatherForecastTable").innerHTML = parseWeatherUpdateJsonAsForecastTable(weatherUpdateJson);
 };

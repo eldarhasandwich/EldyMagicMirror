@@ -1,15 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Unbounded&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Azeret+Mono&display=swap");
+
+/* html {
+
+
+} */
 
 body {
   /* color: greenyellow;
   text-shadow: 0 0 15px greenyellow; */
   color: rgb(196, 240, 255);
   text-shadow: 0 0 15px rgb(196, 240, 255);
-  font-family: "Major Mono Display", monospace;
-  /* font-family: "Unbounded", monospace; */
-  /* font-family: "Lobster", monospace; */
+
+  font-family: "Azeret Mono", monospace;
 
   /* padding: 2.5%; */
   overflow: hidden;
