@@ -1,4 +1,5 @@
 const COUNTDOWNLIST = [
+	{ name: "Lindsay Birth", date: "May 28 1997" },
 	{ name: "Hogwarts Legacy Release", date: "Febuary 10 2023" },
 	{ name: "valentines day", date: "Febuary 14 2023" },
 	{ name: "paramore concert", date: "July 9 2023" },
