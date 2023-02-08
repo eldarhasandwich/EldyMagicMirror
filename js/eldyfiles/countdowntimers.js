@@ -1,9 +1,7 @@
 const COUNTDOWNLIST = [
 	{ name: "Hogwarts Legacy Release", date: "Febuary 10 2023" },
-	{
-		name: "2023 New Years",
-		date: "January 1 2023"
-	},
+	{ name: "valentines day", date: "Febuary 14 2023" },
+	{ name: "paramore concert", date: "July 9 2023" },
 	{
 		name: "Super Mario World Opening",
 		date: "February 17 2023"
@@ -17,11 +15,11 @@ const COUNTDOWNLIST = [
 		date: "February 24 2023"
 	},
 	{
-		name: "Maddie Bday",
+		name: "Maddie Birthday",
 		date: "May 28 2023"
 	},
 	{
-		name: "Eldy Bday",
+		name: "Eldy Birthday",
 		date: "June 8 2023"
 	},
 	{
