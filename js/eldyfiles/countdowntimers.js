@@ -1,8 +1,8 @@
 const COUNTDOWNLIST = [
 	{ name: "Lindsay Birth", date: "May 28 1997" },
 	{ name: "Hogwarts Legacy Release", date: "Febuary 10 2023" },
-	{ name: "valentines day", date: "Febuary 14 2023" },
-	{ name: "paramore concert", date: "July 9 2023" },
+	{ name: "Valentines Day", date: "Febuary 14 2023" },
+	{ name: "Paramore Concert", date: "July 9 2023" },
 	{
 		name: "Super Mario World Opening",
 		date: "February 17 2023"
@@ -39,8 +39,6 @@ const COUNTDOWNLIST = [
 
 const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 
-// TODO MAKE TIMER ACKNOWLEDGE THINGS THAT HAVE TAKEN PLACE ALREADY
-
 const parseCountdownsAsDivList = () => {
 	const timeUntils = COUNTDOWNLIST.map((item) => {
 		const n = Date.now();
@@ -55,12 +53,17 @@ const parseCountdownsAsDivList = () => {
 		.sort((a, b) => a.millisecondsUntil - b.millisecondsUntil)
 		.map((item) => {
 			const name = item.name;
-			const time = Math.floor(item.millisecondsUntil / MILLISECONDS_PER_DAY);
+			const time = Math.ceil(item.millisecondsUntil / MILLISECONDS_PER_DAY);
 			const dateHasPassed = time < 0;
-			const timeString = !dateHasPassed ? `${time} days` : `${time * -1} days ago`;
+			const dayIsToday = time === 0;
+
+			let timeString = "";
+			if (dayIsToday) timeString = "Today!!!";
+			else if (dateHasPassed) timeString = `${time * -1} days ago`;
+			else timeString = `${time} days`;
 
 			return `
-                <div ${dateHasPassed && 'style="color:#90EE90"'}>
+                <div ${dateHasPassed && 'style="color:#90EE90"'} ${dayIsToday && 'style="color:#6495ED"'} >
                     <span>${name} >>> </span>
                     <span>${timeString}</span>
                 </div>
