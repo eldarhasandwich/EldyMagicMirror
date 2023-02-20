@@ -65,7 +65,7 @@ const parseCountdownsAsDivList = () => {
 
 			return `
                 <div ${dateHasPassed && 'style="color:#90EE90"'} ${dayIsToday && 'style="color:#6495ED"'} >
-                    <span>${name} /// </span>
+                    <span>${name} >>> </span>
                     <span>${timeString}</span>
                 </div>
             `;
