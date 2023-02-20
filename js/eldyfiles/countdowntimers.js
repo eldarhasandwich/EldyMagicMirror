@@ -1,6 +1,7 @@
 const COUNTDOWNLIST = [
+	{ name: "Lindsay Flys Out", date: "Febuary 17 2023" },
+	{ name: "Lindsay Flys Back", date: "Febuary 22 2023" },
 	{ name: "Lindsay Birth", date: "May 28 1997" },
-	{ name: "Hogwarts Legacy Release", date: "Febuary 10 2023" },
 	{ name: "Valentines Day", date: "Febuary 14 2023" },
 	{ name: "Paramore Concert", date: "July 9 2023" },
 	{

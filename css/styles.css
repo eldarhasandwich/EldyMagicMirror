@@ -80,6 +80,10 @@ td {
   font-size: 24px;
 }
 
+.weatherErrorMessage {
+  color: rgb(255, 108, 108);
+}
+
 .countDownTimers {
   display: flex;
   flex-direction: column;

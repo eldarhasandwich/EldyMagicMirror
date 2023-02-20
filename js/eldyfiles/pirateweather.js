@@ -84,9 +84,21 @@ const weatherUpdate = async () => {
 	document.getElementById("weatherForecastTable").innerHTML = parseWeatherUpdateJsonAsForecastTable(weatherUpdateJson);
 };
 
+const weatherUpdateWithErrorHandling = async (retries = 5) => {
+	if (retries <= 0) return;
+
+	try {
+		await weatherUpdate();
+		document.getElementById("weatherErrorMessage").innerHTML = "";
+	} catch (e) {
+		document.getElementById("weatherErrorMessage").innerHTML = `${e} /// retries left: ${retries - 1}`;
+		setTimeout(() => weatherUpdateWithErrorHandling(retries - 1), 10 * 1000);
+	}
+};
+
 const weatherRunner = () => {
-	weatherUpdate();
-	setInterval(weatherUpdate, HOUR_MS * 3);
+	weatherUpdateWithErrorHandling();
+	setInterval(() => weatherUpdateWithErrorHandling(), HOUR_MS * 3);
 };
 
 weatherRunner();
