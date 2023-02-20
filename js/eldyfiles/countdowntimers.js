@@ -50,9 +50,11 @@ const parseCountdownsAsDivList = () => {
 		};
 	});
 
+	const l = timeUntils.length;
+
 	return timeUntils
 		.sort((a, b) => a.millisecondsUntil - b.millisecondsUntil)
-		.map((item) => {
+		.map((item, index) => {
 			const name = item.name;
 			const time = Math.ceil(item.millisecondsUntil / MILLISECONDS_PER_DAY);
 			const dateHasPassed = time < 0;
@@ -64,10 +66,12 @@ const parseCountdownsAsDivList = () => {
 			else timeString = `${time} days`;
 
 			return `
-                <div ${dateHasPassed && 'style="color:#90EE90"'} ${dayIsToday && 'style="color:#6495ED"'} >
-                    <span>${name} >>> </span>
-                    <span>${timeString}</span>
-                </div>
+				<div ${l - index == 1 && 'style="opacity:0.25"'} ${l - index == 2 && 'style="opacity:0.50"'} ${l - index == 3 && 'style="opacity:0.75"'} >
+					<div ${dateHasPassed && 'style="color:#90EE90"'} ${dayIsToday && 'style="color:#6495ED"'} >
+						<span>${name} >>> </span>
+						<span>${timeString}</span>
+					</div>
+				</div>
             `;
 		})
 		.join("");

@@ -26,6 +26,7 @@ const recursivelyReadStream = async (stream) => {
 };
 
 const parseWeatherUpdateJsonAsForecastTable = (weatherUpdateJson) => {
+	const l = weatherUpdateJson.daily.data.length;
 	return weatherUpdateJson.daily.data
 		.map((day, index) => {
 			const highs = getTranslatedUnitsForCelciusValue(day.temperatureMax);
@@ -34,7 +35,7 @@ const parseWeatherUpdateJsonAsForecastTable = (weatherUpdateJson) => {
 			const displayDay = index === 0 ? "Today" : dayArray[new Date(day.time * 1000).getDay()];
 
 			return `
-            <tr>
+            <tr ${l - index == 1 && 'style="opacity:0.25"'} ${l - index == 2 && 'style="opacity:0.50"'} ${l - index == 3 && 'style="opacity:0.75"'} >
                 <td>${displayDay}</td>
 
                 <td style="color:coral">${highs.f}°F</td>
@@ -63,14 +64,12 @@ const fetchPirateWeatherUpdate = async () => {
 };
 
 const getCurrentWeatherFromHourlyArray = (weatherUpdateJson) => {
-	const currentTimestampSeconds = Math.ceil(Date.now() / 1000) + 0 * 60 * 60;
+	const currentTimestampSeconds = Math.ceil(Date.now() / 1000); //+ 0 * 60 * 60;
 	const hourlySorted = [...weatherUpdateJson.hourly.data].sort((a, b) => {
 		return a.time - b.time;
 	});
 
 	const currentDatapoint = hourlySorted.find((d) => d.time > currentTimestampSeconds);
-
-	console.log({ currentTimestampSeconds, hourlySorted, currentDatapoint });
 
 	return currentDatapoint;
 };
