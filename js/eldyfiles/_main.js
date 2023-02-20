@@ -14,7 +14,7 @@ const setStatsForNerds = () => {
 const eldyMirrorRunner = () => {
 	document.documentElement.style.cursor = "none";
 
-	setStatsForNerds();
+	// setStatsForNerds();
 };
 
 eldyMirrorRunner();

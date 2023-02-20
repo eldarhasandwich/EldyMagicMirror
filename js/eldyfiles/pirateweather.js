@@ -62,24 +62,39 @@ const fetchPirateWeatherUpdate = async () => {
 	return readBodyStringJson;
 };
 
+const getCurrentWeatherFromHourlyArray = (weatherUpdateJson) => {
+	const currentTimestampSeconds = Math.ceil(Date.now() / 1000) + 0 * 60 * 60;
+	const hourlySorted = [...weatherUpdateJson.hourly.data].sort((a, b) => {
+		return a.time - b.time;
+	});
+
+	const currentDatapoint = hourlySorted.find((d) => d.time > currentTimestampSeconds);
+
+	console.log({ currentTimestampSeconds, hourlySorted, currentDatapoint });
+
+	return currentDatapoint;
+};
+
 const weatherUpdate = async () => {
 	const weatherUpdateJson = await fetchPirateWeatherUpdate();
 
 	console.log({ weatherUpdateJson });
 
-	const currentActualTempurature = weatherUpdateJson.currently.temperature;
-	const currentFeelsLikeTempurature = weatherUpdateJson.currently.apparentTemperature;
+	const nowWeatherDatapoint = getCurrentWeatherFromHourlyArray(weatherUpdateJson);
+
+	const currentActualTempurature = nowWeatherDatapoint.temperature;
+	const currentFeelsLikeTempurature = nowWeatherDatapoint.apparentTemperature;
 
 	const current = {
 		actual: getTranslatedUnitsForCelciusValue(currentActualTempurature),
 		feelsLike: getTranslatedUnitsForCelciusValue(currentFeelsLikeTempurature)
 	};
-
 	document.getElementById("weatherLocation").textContent = `Weather | ${weatherUpdateJson.location.name}`;
-	document.getElementById("weatherActualTemp").textContent = `${current.actual.f}°F / ${current.actual.c}°C`;
+	document.getElementById("weatherActualTemp").textContent = `${current.actual.f}°F / ${current.actual.c}°C /// ${nowWeatherDatapoint.summary}`;
 	document.getElementById("weatherFeelsLikeTemp").textContent = `Feels like ${current.feelsLike.f}°F / ${current.feelsLike.c}°C`;
-	document.getElementById("weatherHumidity").textContent = `${roundToOneDecimal(weatherUpdateJson.currently.humidity * 100)}% Humidity`;
-	document.getElementById("weatherCloudCover").textContent = `${roundToOneDecimal(weatherUpdateJson.currently.cloudCover * 100)}% Cloud cover`;
+
+	document.getElementById("weatherExtraInfo").textContent = `
+		${roundToOneDecimal(weatherUpdateJson.currently.humidity * 100)}% Humidity /// ${roundToOneDecimal(weatherUpdateJson.currently.cloudCover * 100)}% Cloud cover`;
 
 	document.getElementById("weatherForecastTable").innerHTML = parseWeatherUpdateJsonAsForecastTable(weatherUpdateJson);
 };
