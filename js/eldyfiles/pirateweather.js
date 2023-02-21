@@ -88,7 +88,7 @@ const weatherUpdate = async () => {
 		actual: getTranslatedUnitsForCelciusValue(currentActualTempurature),
 		feelsLike: getTranslatedUnitsForCelciusValue(currentFeelsLikeTempurature)
 	};
-	document.getElementById("weatherLocation").textContent = `Weather | ${weatherUpdateJson.location.name}`;
+	document.getElementById("weatherLocation").textContent = `Weather | ${weatherUpdateJson.merry.location.name}`;
 	document.getElementById("weatherActualTemp").textContent = `${current.actual.f}°F / ${current.actual.c}°C /// ${nowWeatherDatapoint.summary}`;
 	document.getElementById("weatherFeelsLikeTemp").textContent = `Feels like ${current.feelsLike.f}°F / ${current.feelsLike.c}°C`;
 
