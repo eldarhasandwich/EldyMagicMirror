@@ -1,17 +1,5 @@
 const COUNTDOWNLIST = [
-	{ name: "Lindsay Flys Out", date: "Febuary 17 2023" },
-	{ name: "Lindsay Flys Back", date: "Febuary 22 2023" },
-	{ name: "Lindsay Birth", date: "May 28 1997" },
-	{ name: "Valentines Day", date: "Febuary 14 2023" },
 	{ name: "Paramore Concert", date: "July 9 2023" },
-	{
-		name: "Super Mario World Opening",
-		date: "February 17 2023"
-	},
-	{
-		name: "Atomic Heart Release",
-		date: "February 21 2023"
-	},
 	{
 		name: "KSP 2 Release",
 		date: "February 24 2023"
@@ -23,6 +11,10 @@ const COUNTDOWNLIST = [
 	{
 		name: "Eldy Birthday",
 		date: "June 8 2023"
+	},
+	{
+		name: "Fly out to Kentucky",
+		date: "June 21 2023"
 	},
 	{
 		name: "Halloween",
