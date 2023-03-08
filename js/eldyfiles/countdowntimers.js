@@ -1,9 +1,6 @@
 const COUNTDOWNLIST = [
 	{ name: "Paramore Concert", date: "July 9 2023" },
-	{
-		name: "KSP 2 Release",
-		date: "February 24 2023"
-	},
+	{ name: "Lucy Cone Removal", date: "March 16 2023" },
 	{
 		name: "Maddie Birthday",
 		date: "May 28 2023"
@@ -27,6 +24,18 @@ const COUNTDOWNLIST = [
 	{
 		name: "New Years",
 		date: "January 1 2024"
+	},
+	{
+		name: "Valentines Day",
+		date: "Febuary 14 2024"
+	},
+	{
+		name: "Maddie Birthday",
+		date: "May 28 2024"
+	},
+	{
+		name: "Eldy Birthday",
+		date: "June 8 2024"
 	}
 ];
 

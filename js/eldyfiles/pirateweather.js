@@ -53,10 +53,9 @@ const parseWeatherUpdateJsonAsForecastTable = (weatherUpdateJson) => {
 
 const fetchPirateWeatherUpdate = async () => {
 	// get weather forecast for austin
-	const requestUrl = "https://merry-sky.onrender.com/weather?q=cedar%20park&source=pirateweather";
+	const requestUrl = "https://merry-sky.onrender.com/weather?q=30.493810,%20-97.814664&source=pirateweather";
 	const result = await fetch(requestUrl);
 	const readBody = await recursivelyReadStream(result.body.getReader());
-
 	const readBodyString = new TextDecoder("utf-8").decode(readBody);
 	const readBodyStringJson = JSON.parse(readBodyString);
 
