@@ -13,6 +13,7 @@ const COUNTDOWNLIST = [
 		name: "Fly out to Kentucky",
 		date: "June 21 2023"
 	},
+	{ name: "Startfield Launch", date: "September 6 2023" },
 	{
 		name: "Halloween",
 		date: "October 31 2023"
