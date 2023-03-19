@@ -9,7 +9,8 @@ body {
   /* color: greenyellow;
   text-shadow: 0 0 15px greenyellow; */
   color: rgb(196, 240, 255);
-  text-shadow: 0 0 15px rgb(196, 240, 255);
+  /* text-shadow: 0 0 15px rgb(196, 240, 255); */
+  /* text-shadow: 0 0 15px rgb(53, 137, 1); */
 
   font-family: "Azeret Mono", monospace;
 
@@ -62,8 +63,15 @@ body {
   float: left;
 }
 
-.clockTime {
-  font-size: 72px;
+.clockTime12hr {
+  font-size: 108px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.clockTime24hr {
+  font-size: 56px;
+  margin-top: 10px;
   margin-bottom: 0px;
 }
 

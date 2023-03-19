@@ -1,6 +1,7 @@
 const COUNTDOWNLIST = [
+	{ name: "Ramadan Starts", date: "March 22 2023" },
+	{ name: "Ramadan Ends", date: "April 21 2023" },
 	{ name: "Paramore Concert", date: "July 9 2023" },
-	{ name: "Lucy Cone Removal", date: "March 16 2023" },
 	{
 		name: "Maddie Birthday",
 		date: "May 28 2023"
@@ -13,7 +14,7 @@ const COUNTDOWNLIST = [
 		name: "Fly out to Kentucky",
 		date: "June 21 2023"
 	},
-	{ name: "Startfield Launch", date: "September 6 2023" },
+	{ name: "Starfield Launch", date: "September 6 2023" },
 	{
 		name: "Halloween",
 		date: "October 31 2023"
