@@ -116,6 +116,7 @@ body {
 td {
   padding-left: 15px;
   font-size: 24px;
+  font-weight: 200;
 }
 
 .weatherErrorMessage {
@@ -131,4 +132,5 @@ td {
 
 .countDownTimers > div {
   font-size: 28px;
+  font-weight: 200;
 }

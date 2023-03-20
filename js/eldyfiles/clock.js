@@ -369,8 +369,8 @@ const clockUpdate = () => {
 	const sunriseTimeText = `Sunrise: ${getDeltaTime(sunrise, currentTime)} (${get12HrTime(sunrise)})`;
 	const sunsetTimeText = `Sunset: ${getDeltaTime(sunset, currentTime)} (${get12HrTime(sunset)})`;
 
-	if (sunriseTimeText.includes("ago")) document.getElementById("sunriseTime").style.opacity = 0.4;
-	if (sunsetTimeText.includes("ago")) document.getElementById("sunsetTime").style.opacity = 0.4;
+	document.getElementById("sunriseTime").style.opacity = sunriseTimeText.includes("ago") ? 0.4 : 1;
+	document.getElementById("sunsetTime").style.opacity = sunsetTimeText.includes("ago") ? 0.4 : 1;
 
 	document.getElementById("sunriseTime").textContent = sunriseTimeText;
 	document.getElementById("sunsetTime").textContent = sunsetTimeText;
