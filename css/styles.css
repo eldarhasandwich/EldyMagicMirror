@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Azeret+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 /* html {
 
@@ -13,6 +13,7 @@ body {
   /* text-shadow: 0 0 15px rgb(53, 137, 1); */
 
   font-family: "Azeret Mono", monospace;
+  font-weight: 400;
 
   /* padding: 2.5%; */
   overflow: hidden;
@@ -63,16 +64,30 @@ body {
   float: left;
 }
 
+.clockDate {
+  font-weight: 300;
+}
+
 .clockTime12hr {
+  font-weight: 100;
   font-size: 108px;
   margin-top: 10px;
   margin-bottom: 0px;
 }
 
 .clockTime24hr {
+  font-weight: 200;
   font-size: 56px;
   margin-top: 10px;
   margin-bottom: 0px;
+}
+
+.sunriseTime {
+  font-weight: 300;
+}
+
+.sunsetTime {
+  font-weight: 300;
 }
 
 .weatherApp {

@@ -364,7 +364,7 @@ const clockUpdate = () => {
 	const currentTime = new Date(Date.now());
 
 	const { sunrise, sunset } = SunCalc.getTimes(currentTime, 30.266666, -97.73333); // austin coords
-	console.log({ sunrise, sunset });
+	// console.log({ sunrise, sunset });
 
 	const sunriseTimeText = `Sunrise: ${getDeltaTime(sunrise, currentTime)} (${get12HrTime(sunrise)})`;
 	const sunsetTimeText = `Sunset: ${getDeltaTime(sunset, currentTime)} (${get12HrTime(sunset)})`;
