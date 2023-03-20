@@ -355,7 +355,7 @@ const getDeltaTime = (targetTime, currentTime) => {
 	const nMinutes = Math.floor(timeUntil / 60);
 	const nHours = Math.floor(nMinutes / 60);
 
-	return `${nHours} hours ${nMinutes - nHours * 60} minutes ${hasPassed ? "ago" : ""}`;
+	return `${nHours !== 0 ? nHours + " hours " : ""}${nMinutes - nHours * 60} minutes ${hasPassed ? "ago" : ""}`;
 };
 
 const clockUpdate = () => {
