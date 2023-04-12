@@ -1,5 +1,6 @@
 const COUNTDOWNLIST = [
-	{ name: "Ramadan Starts", date: "March 22 2023" },
+	{ name: "Kyary Concert", date: "May 17 2023" },
+	{ name: "Eurovision Starts", date: "May 9 2023" },
 	{ name: "Ramadan Ends", date: "April 21 2023" },
 	{ name: "Paramore Concert", date: "July 9 2023" },
 	{
@@ -30,15 +31,15 @@ const COUNTDOWNLIST = [
 	{
 		name: "Valentines Day",
 		date: "Febuary 14 2024"
-	},
-	{
-		name: "Maddie Birthday",
-		date: "May 28 2024"
-	},
-	{
-		name: "Eldy Birthday",
-		date: "June 8 2024"
 	}
+	// {
+	// 	name: "Maddie Birthday",
+	// 	date: "May 28 2024"
+	// },
+	// {
+	// 	name: "Eldy Birthday",
+	// 	date: "June 8 2024"
+	// }
 ];
 
 const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
